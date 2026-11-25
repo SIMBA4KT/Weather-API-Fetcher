@@ -32,10 +32,24 @@ A lightweight Python application that connects to real-time weather endpoints to
 
 ```text
 Weather-API-Fetcher/
-├── main.py              # CLI entry point & weather API request logic
-├── frontend/            # TypeScript, HTML, and CSS client files
-├── requirements.txt     # Python dependencies
-└── README.md            # Project documentation
+├── backend_py/
+│   ├── weather_client.py   # Open-Meteo geocoding + forecast fetcher & parser
+│   ├── weather_bot.py      # Scope-guarded WeatherBot (Gemini + rule-based fallback)
+│   ├── api.py              # FastAPI REST endpoints (/api/weather, /api/chat)
+│   ├── app.py              # Standalone Streamlit UI + chat interface
+│   └── requirements.txt
+├── gateway_go/
+│   ├── main.go             # Go reverse proxy with CORS & per-IP rate limiting (60 req/min)
+│   └── go.mod
+└── frontend_ts/
+    ├── index.html
+    ├── package.json
+    ├── tsconfig.json
+    └── src/
+        ├── types.ts        # Strict TypeScript interfaces
+        ├── api.ts          # Typed API client pointing to Go (:8080) or Python (:8000)
+        ├── main.ts         # Dashboard + WeatherBot UI controller
+        └── style.css
 ```
 
 ---
